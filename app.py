@@ -29,7 +29,9 @@ import aws_cdk as cdk
 from aws_cdk_python_devcontainer_main.pipeline_stack import MyPipelineStack
 
 app = cdk.App()
-MyPipelineStack(app, "MyPipelineStack")
+MyPipelineStack(app, "MyPipelineStack", 
+    env=cdk.Environment(account="246213974221", region="us-west-2")
+)
 
 app.synth()
 
