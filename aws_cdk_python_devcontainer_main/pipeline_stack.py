@@ -34,8 +34,9 @@
 
 import aws_cdk as cdk
 from constructs import Construct
-from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep, CodeBuildOptions
 from aws_cdk_python_devcontainer_main.pipeline_app_stage import MyPipelineAppStage
+import aws_cdk.aws_codebuild as codebuild
 # from aws_cdk.pipelines import ManualApprovalStep
 
 class MyPipelineStack(cdk.Stack):
@@ -49,7 +50,9 @@ class MyPipelineStack(cdk.Stack):
                             input=CodePipelineSource.git_hub("NikhitaBusa/AWS_CDK", "Nikhitas_code"),
                             commands=["npm install -g aws-cdk",
                                 "python -m pip install -r requirements.txt",
-                                "cdk synth"]))
+                                "cdk synth"]),
+                        code_build_defaults=CodeBuildOptions(build_environment=codebuild.BuildEnvironment(privileged=True))
+                    )
 
         testing_stage = pipeline.add_stage(MyPipelineAppStage(self, "test",
             env=cdk.Environment(account="246213974221", region="us-west-2")))
