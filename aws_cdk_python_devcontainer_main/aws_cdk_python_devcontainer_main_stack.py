@@ -70,11 +70,11 @@ class AwsCdkPythonDevcontainerMainStack(Stack):
 
         # bucket = s3.Bucket(self, "TestNikhita667")
 
-        handler = lambda_.PythonFunction(self, "TestLambda",
+        handler = lambda_.PythonFunction(self, "TestLambdaWithDocker",
                     entry="aws_cdk_python_devcontainer_main/lambda",
                     index="main.py",
                     handler="lambda_handler",
-                    function_name="TestLambda",
+                    function_name="TestLambdaWithDocker",
                     runtime=awslambda.Runtime.PYTHON_3_7,
                     timeout=cdk.Duration.seconds(300),
                     environment={"ENV": "dev"}
